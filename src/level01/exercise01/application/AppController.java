@@ -11,7 +11,22 @@ import utils.ConsoleUtils;
 
 public class AppController {
 
+    private static AppController instance;
     private ConsoleApp consoleApp;
+
+    private AppController() {
+    }
+
+    public static AppController getInstance() {
+        if (instance == null) {
+            synchronized (AppController.class) {
+                if (instance == null) {
+                    instance = new AppController();
+                }
+            }
+        }
+        return instance;
+    }
 
     public void run() {
 

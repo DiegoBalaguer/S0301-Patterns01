@@ -10,14 +10,29 @@ import utils.ConsoleUtils;
  * DATE: 01/06/2025
  */
 
-public class ApplicationController {
+public class AppController {
 
     private static AddressBook addressBook;
-    private ApplicationWorkers applicationManager;
+    private static AppController instance;
+    private AppWorkers appWorkers;
+
+    private AppController() {
+    }
+
+    public static AppController getInstance() {
+        if (instance == null) {
+            synchronized (AppController.class) {
+                if (instance == null) {
+                    instance = new AppController();
+                }
+            }
+        }
+        return instance;
+    }
 
     public void run() {
         addressBook = new AddressBook();
-        applicationManager = new ApplicationWorkers(addressBook);
+        appWorkers = AppWorkers.getInstance(addressBook);
         menu();
         ConsoleUtils.closeScanner();
     }
@@ -40,7 +55,7 @@ public class ApplicationController {
 
     private void menuOptionsWithoutAddresses(OptionsMenuMain idMenu) {
         switch (idMenu) {
-            case CONTACT_CREATE -> applicationManager.createContact();
+            case CONTACT_CREATE -> appWorkers.createContact();
             default -> {
                 if (addressBook.isEmpty()) {
                     System.out.println("No contacts registered into the system.");
@@ -51,7 +66,7 @@ public class ApplicationController {
 
     private void menuOptionsWithAddresses(OptionsMenuMain idMenu) {
         switch (idMenu) {
-            case CONTACT_LIST -> applicationManager.showListContacts();
+            case CONTACT_LIST -> appWorkers.showListContacts();
             default -> System.out.println("Error: The value is wrong.");
         }
     }

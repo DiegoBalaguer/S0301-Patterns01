@@ -1,6 +1,6 @@
 package level03.exercise01;
 
-import level03.exercise01.application.ApplicationController;
+import level03.exercise01.application.AppController;
 
 /**
  * PROGRAM: Main
@@ -12,9 +12,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        ApplicationController appController = ApplicationController.getAppController();
-
-        appController.run();
+        AppController.getAppController().run();
 
         System.out.println("PROCESS FINISHED...");
     }

@@ -11,16 +11,16 @@ import java.util.*;
  * DATE: 03/06/2025
  */
 
-public class ApplicationController {
+public class AppController {
 
-    private static ApplicationController appController = new ApplicationController();
+    private static AppController appController = new AppController();
     private List<Vehicle> vehiclesList = new ArrayList<>();
     private List<Command> commandsParking = new ArrayList<>();
-    ApplicationWorkers workers = ApplicationWorkers.getWorkers(vehiclesList, commandsParking);
+    AppWorkers workers = AppWorkers.getWorkers(vehiclesList, commandsParking);
 
-    private ApplicationController() {}
+    private AppController() {}
 
-    public static ApplicationController getAppController() {
+    public static AppController getAppController() {
         return appController;
     }
 

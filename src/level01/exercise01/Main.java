@@ -12,10 +12,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        AppController appController = new AppController();
-
-
-        appController.run();
+        AppController.getInstance().run();
 
         System.out.println("PROCESS FINISHED...");
     }

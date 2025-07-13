@@ -18,13 +18,14 @@ public class Instruction {
             .map(e -> e.name().toLowerCase())
             .collect(Collectors.toList());
     private String text;
+    private InstructionsEnum command;
 
     public Instruction(String text) throws Hal9000Exception {
         setText(text);
     }
 
-    public void isCorrect() throws Hal9000Exception {
-        if(!COMMANDS.contains(getCommand())) {
+    private void isCorrect() throws Hal9000Exception {
+        if(!COMMANDS.contains(getTextCommand())) {
             throw new Hal9000Exception("Invalid instruction");
         }
     }
@@ -34,10 +35,26 @@ public class Instruction {
             throw new Hal9000Exception("Text cannot be empty");
         }
         this.text = text.toLowerCase();
+
+        isCorrect();
+        setCommand();
     }
 
-    public String getCommand() {
+    private void setCommand() {
+        for(InstructionsEnum command : InstructionsEnum.values()) {
+            if(command.name().equals(getTextCommand())) {
+                this.command = command;
+                return;
+            }
+        }
+    }
+
+    private String getTextCommand() {
         return textParam(0);
+    }
+
+    public InstructionsEnum getCommand() {
+        return command;
     }
 
     public String getParameter() throws Hal9000Exception {

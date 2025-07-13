@@ -1,6 +1,6 @@
 package level02.exercise01.application;
 
-import level02.exercise01.abstractFactories.AddressBookFactory;
+import level02.exercise01.factories.AddressBookFactory;
 import level02.exercise01.exceptions.CountryNotFoundException;
 import level02.exercise01.model.AddressBook;
 import level02.exercise01.model.Contact;
@@ -9,11 +9,25 @@ import utils.StringUtils;
 
 import java.util.ArrayList;
 
-public class ApplicationWorkers {
+public class AppWorkers {
 
+    private static AppWorkers instance;
     private static AddressBook addressBook;
 
-    public ApplicationWorkers(AddressBook addressBook) {
+    private AppWorkers() {}
+
+    public static AppWorkers getInstance(AddressBook addressBook) {
+        if (instance == null) {
+            synchronized (AppWorkers.class) {
+                if (instance == null) {
+                    instance = new AppWorkers(addressBook);
+                }
+            }
+        }
+        return instance;
+    }
+
+    private AppWorkers(AddressBook addressBook) {
         this.addressBook = addressBook;
     }
 

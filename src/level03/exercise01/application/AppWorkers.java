@@ -15,15 +15,15 @@ import java.util.List;
  * DATE: 03/06/2025
  */
 
-public class ApplicationWorkers {
-    private static ApplicationWorkers workers = new ApplicationWorkers();
+public class AppWorkers {
+    private static AppWorkers workers = new AppWorkers();
     private static List<Vehicle> vehiclesList = new ArrayList<>();
     private static List<Command> commandsParking = new ArrayList<Command>();
 
-    private ApplicationWorkers() {
+    private AppWorkers() {
     }
 
-    public static ApplicationWorkers getWorkers(List<Vehicle> vehiclesInput, List<Command> commandsInput) {
+    public static AppWorkers getWorkers(List<Vehicle> vehiclesInput, List<Command> commandsInput) {
         vehiclesList = vehiclesInput;
         commandsParking = commandsInput;
         return workers;
